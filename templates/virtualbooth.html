@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <!--Sponsor Section-->
+<section class="gallery-section">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <span class="title">Virtual Booth</span>
+            <h2>가상 부스</h2>
+        </div>
+
+        <div class="row">
+            {% for d in virtualbooth %}
+                <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                    <div class="image-box text-center">
+                        <figure class="image-box"><a href="/virtualbooth/{{  d.id }}" target="_blank"><img src="{{ d.sponsor.logo.url }}" alt="{{  d.sponsor.name_ko }}"></a></figure>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

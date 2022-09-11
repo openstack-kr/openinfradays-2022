@@ -1,0 +1,180 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--Page Title-->
+<section class="page-title">
+    <div class="auto-container">
+        <h1 style="color: #000000">Session Schedule</h1>
+    </div>
+</section>
+<!--End Page Title-->
+
+<section class="schedule-section style-three">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <h2>Keynote Session</h2>
+        </div>
+        <div class="schedule-timeline row">
+            <!-- schedule Block -->
+            {% for s in keynote %}
+            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                    <div class="inner">
+                        <div class="speaker-info">
+                            <figure class="thumb"><img src="{{ s.speaker.profile_img.url }}" alt=""></figure>
+                            <h5 class="name">{{ s.speaker.name }}</h5>
+                            <span class="designation">{{ s.speaker.company }}</span>
+                        </div>
+                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                        <div class="text">{{ s.details | truncatechars:60 }}</div>
+                        <div class="btn-box">
+                            <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <h2>Community Session</h2>
+        </div>
+        <div class="schedule-timeline row">
+            <!-- schedule Block -->
+            {% for s in community %}
+            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                    <div class="inner">
+                        <div class="speaker-info">
+                            <figure class="thumb"><img src="{{ s.speaker.profile_img.url }}" alt=""></figure>
+                            <h5 class="name">{{ s.speaker.name }}</h5>
+                            <span class="designation">{{ s.speaker.company }}</span>
+                        </div>
+                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                        <div class="text">{{ s.details | truncatechars:60 }}</div>
+                        <div class="btn-box">
+                            <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <h2>Tech Session</h2>
+        </div>
+        <div class="schedule-tabs style-two tabs-box">
+            <div class="btns-box">
+                <!--Tabs Box-->
+                <ul class="tab-buttons clearfix">
+                    <li class="tab-btn" data-tab="#tab-1">
+                        <span class="day">Day 01</span>
+                        <span class="date">07</span>
+                        <span class="month">Dec</span> 2021
+                    </li>
+
+                    <li class="tab-btn" data-tab="#tab-2">
+                        <span class="day">Day 02</span>
+                        <span class="date">08</span>
+                        <span class="month">Dec</span> 2021
+                    </li>
+
+                    <li class="tab-btn active-btn" data-tab="#tab-3">
+                        <span class="day">Day 03</span>
+                        <span class="date">09</span>
+                        <span class="month">Dec</span> 2021
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tabs-content">
+                <div class="tab" id="tab-1">
+                        <div class="schedule-timeline row">
+                            <!-- schedule Block -->
+                            {% for s in day1 %}
+                            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-box">
+                                    <div class="inner">
+                                        <div class="speaker-info">
+                                            {% if s.speaker.profile_img %}
+                                            <figure class="thumb"><img src="{{ s.speaker.profile_img.url }}" alt=""></figure>
+                                            {% else %}
+                                            <figure class="thumb"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                                            {% endif %}
+                                            <h5 class="name">{{ s.speaker.name }}</h5>
+                                            <span class="designation">{{ s.speaker.company }}</span>
+                                        </div>
+                                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                                        <div class="text">{{ s.details | safe | truncatechars:200 }}</div>
+                                        <div class="btn-box">
+                                            <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                </div>
+                <div class="tab" id="tab-2">
+                        <div class="schedule-timeline row">
+                            <!-- schedule Block -->
+                            {% for s in day2 %}
+                            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-box">
+                                    <div class="inner">
+                                        <div class="speaker-info">
+                                            {% if s.speaker.profile_img %}
+                                            <figure class="thumb"><img src="{{ s.speaker.profile_img.url }}" alt=""></figure>
+                                            {% else %}
+                                            <figure class="thumb"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                                            {% endif %}
+                                            <h5 class="name">{{ s.speaker.name }}</h5>
+                                            <span class="designation">{{ s.speaker.company }}</span>
+                                        </div>
+                                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                                        <div class="text">{{ s.details | safe | truncatechars:200 }}</div>
+                                        <div class="btn-box">
+                                            <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                </div>
+                <div class="tab active-tab" id="tab-3">
+                        <div class="schedule-timeline row">
+                            <!-- schedule Block -->
+                            {% for s in day3 %}
+                            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-box">
+                                    <div class="inner">
+                                        <div class="speaker-info">
+                                            {% if s.speaker.profile_img %}
+                                            <figure class="thumb"><img src="{{ s.speaker.profile_img.url }}" alt=""></figure>
+                                            {% else %}
+                                            <figure class="thumb"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                                            {% endif %}
+                                            <h5 class="name">{{ s.speaker.name }}</h5>
+                                            <span class="designation">{{ s.speaker.company }}</span>
+                                        </div>
+                                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                                        <div class="text">{{ s.details | safe | truncatechars:200 }}</div>
+                                        <div class="btn-box">
+                                            <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--Page Title-->
+<section class="page-title">
+    <div class="auto-container">
+        <h1 style="color: #000000">BoF Schedule</h1>
+    </div>
+</section>
+<section class="schedule-section style-three">
+    <div class="auto-container">
+        <div class="schedule-timeline row">
+            <!-- schedule Block -->
+            {% for b in bof %}
+            <div class="schedule-block col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                    <div class="inner">
+                        <div class="speaker-info">
+                            {% if b.profile_img %}
+                                <figure class="thumb"><img src="{{ b.profile_img.url }}" alt=""></figure>
+                            {% else %}
+                                <figure class="thumb"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                            {% endif %}
+                            <h5 class="name">{{ b.bof_date.month }} / {{ b.bof_date.day }} {{ b.bof_time }}</h5>
+                            <span class="designation">{{ b.moderator }}</span>
+                        </div>
+                        <h4><a href="/bof/{{ b.id }}">{{ b.title }}</a></h4>
+                        <div class="btn-box">
+                            <a href="/bof/{{ b.id }}" class="theme-btn">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="detail-section">
+    <!-- Top -->
+    <div class="detail-top">
+        <div class="txt-top">
+            <div class="detail-title">
+                {{ vb.title }}
+            </div>
+            <div class="detail-message">
+                {{ vb.short_desc }}
+            </div>
+        </div>
+        <div class="img-logo">
+            {% if vb.custom_logo %}
+                <a href="{{ vb.sponsor.homepage_url }}" target="_blank"><img src="{{ vb.custom_logo.url }}" alt="{{ vb.sponsor.name_ko }}"></a>
+            {% else %}
+                <a href="{{ vb.sponsor.homepage_url }}" target="_blank"><img src="{{ vb.sponsor.logo.url }}" alt="{{ vb.sponsor.name_ko }}"></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="area-link">
+        {% if vb.link1 %}
+        <a href="{{ vb.link1 }}" target="_blank">{{ vb.link1_txt }} <i class="flaticon-arrow-pointing-to-right"></i></a>
+        {% endif %}
+        {% if vb.link2 %}
+        <a href="{{ vb.link2 }}" target="_blank">{{ vb.link2_txt }} <i class="flaticon-arrow-pointing-to-right"></i></a>
+        {% endif %}
+        {% if vb.link3 %}
+        <a href="{{ vb.link3 }}" target="_blank">{{ vb.link3_txt }} <i class="flaticon-arrow-pointing-to-right"></i></a>
+        {% endif %}
+        {% if vb.link4 %}
+        <a href="{{ vb.link4 }}" target="_blank">{{ vb.link4_txt }} <i class="flaticon-arrow-pointing-to-right"></i></a>
+        {% endif %}
+        {% if vb.link5 %}
+        <a href="{{ vb.link5 }}" target="_blank">{{ vb.link5_txt }} <i class="flaticon-arrow-pointing-to-right"></i></a>
+        {% endif %}
+    </div>
+
+    <div class="txt-introduce">
+        {{ vb.body | safe }}
+    </div>
+
+    {% if vb.video1 %}
+    <div class="area-video">
+        <iframe width="80%" height="450" src="{{ vb.video1 }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+
+    {% if vb.video2 %}
+    <div class="area-video">
+        <iframe width="80%" height="450" src="{{ vb.video2 }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+
+    {% if vb.video3 %}
+    <div class="area-video">
+        <iframe width="80%" height="450" src="{{ vb.video3 }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+
+    {% if vb.image1 %}
+    <div class="area-image">
+        {% if vb.image1_link != '' %}
+            <a href="{{vb.image1_link.url }}"><img src="{{ vb.image1.url }}"></a>
+        {% else %}
+            <img src="{{ vb.image1.url }}">
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if vb.image2 %}
+    <div class="area-image">
+         {% if vb.image2_link != '' %}
+             <a href="{{vb.image2_link.url }}"><img src="{{ vb.image2.url }}"></a>
+         {% else %}
+             <img src="{{ vb.image2.url }}">
+         {% endif %}
+    </div>
+    {% endif %}
+
+    {% if vb.image3 %}
+    <div class="area-image">
+        <img src="{{ vb.image3.url }}">
+    </div>
+    {% endif %}
+
+
+
+</section>
+{% endblock %}

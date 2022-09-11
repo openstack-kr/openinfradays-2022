@@ -1,0 +1,59 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--Page Title-->
+
+<section class="page-title">
+    <div class="auto-container">
+        <h1 style="color: #000000">{{ b.title }}</h1>
+    </div>
+</section>
+<!--End Page Title-->
+
+<!-- Speker Detail -->
+<section class="speaker-detail">
+    <div class="auto-container">
+        <div class="row">
+            <div class="image-column col-lg-4 col-md-12 col-sm-12">
+                <div class="image-box">
+                    {% if b.profile_img %}
+                    <figure class="image"><img src="{{ b.profile_img.url }}" alt=""></figure>
+                    {% else %}
+                    <figure class="thumb"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="info-column col-lg-8 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <div class="text-box">
+                        <h4>Schedule</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="speaker-session-info">
+                                    <h5>{{ b.bof_date.month }}월 {{ b.bof_date.day }}일 {{ b.bof_time}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Where?</h4>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="speaker-session-info">
+                                    <h5><a href="https://gather.town/app/SOxabOWFw4zC28ux/openinfradays-2021">Gather Town</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>BoF detail</h4>
+                        <p>{{ b.content| safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="video_area" name="video_area">
+        </div>
+    </div>
+</section>
+
+<!--End Speker Detail -->
+{% endblock %}

@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%  block content %}
+    <section class="lobby-title-section">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>OpenInfra Community Days Korea</h2><br><br>
+                <h2>Conference Lobby</h2>
+                <h3>오전 10시, 오늘의 발표가 공개됩니다</h3>
+                <div class="btn-box">
+                    {%  if not request.user.is_authenticated %}
+                        <a href="/login" class="theme-btn btn-style-three"><span class="btn-title">참가 신청</span></a>
+                    {% endif %}
+                    <a href="https://gather.town/app/SOxabOWFw4zC28ux/openinfradays-2021" class="theme-btn btn-style-one"><span class="btn-title">게더 타운 들어가기</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Features Section -->
+    <section class="faq-section">
+        <div class="auto-container">
+            <!-- Sec Title -->
+            <div class="sec-title">
+                <span class="title">Today Highlight</span>
+                <h2>오늘의 주요 이벤트</h2>
+            </div>
+            <div class="row">
+                <!-- Feature Block -->
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
+                    <div class="inner-box">
+                        <div class="icon-box"><span class="icon flaticon-diamond-1"></span></div>
+                        <h4><a href="/program/sponsornight">[후원사의 밤] {{ sn.sponsor.name_ko }}</a></h4>
+                        <div class="text">진행 시간 : {{ sn.event_date.month  }}월 {{ sn.event_date.day }}일 {{ sn.event_time }}</div>
+                        <div class="link-box"><a href="/schedule/sponsornight" class="theme-btn">Read More</a></div>
+                    </div>
+                </div>
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                    {% for bof in bofs %}
+                    <div class="inner-box">
+                        <div class="icon-box"><span class="icon flaticon-group-2"></span></div>
+                        <h4><a href="/bof/{{ bof.id }}">[BoF] {{ bof.title }}</a></h4>
+                        <div class="text">진행 시간 : {{ bof.bof_date.month  }}월 {{ bof.bof_date.day }}일 {{ bof.bof_time }}</div>
+                        <div class="link-box"><a href="/bof/{{ bof.id }}" class="theme-btn">Read More</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="icon-box"><span class="icon flaticon-play-button-3"></span></div>
+                        <h4><a href="/virtualbooth">가상 부스</a></h4>
+                        <div class="text">가상 부스를 통해 후원사의 다양한 서비스를 경험해보세요</div>
+                        <div class="link-box"><a href="/virtualbooth" class="theme-btn">Read More</a></div>
+                    </div>
+                </div>
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="icon-box"><span class="icon flaticon-gift"></span></div>
+                        <h4><a href="/event">경품 이벤트</a></h4>
+                        <div class="text">이벤트에 참여해 경품을 받아가세요</div>
+                        <div class="link-box"><a href="/event" class="theme-btn">Read More</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sec-title">
+                <h3>발표 Q&A 일정</h3>
+            </div>
+            <div class="row">
+                {% for k in qna %}
+                <div class="speaker-block-two col-lg-4 col-md-6 col-sm-6 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="info-box">
+                            <h4 class="name"><a href="/session/{{ k.id }}">{{ k.title }}</a></h4>
+                            <!--<span class="designation">Event Manager</span>-->
+                        </div>
+                        <div class="image-box">
+                            {% if k.speaker.profile_img %}
+                            <figure class="image"><img src="{{ k.speaker.profile_img.url }}" alt=""></figure>
+                            {% else %}
+                            <figure class="image"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                            {% endif %}
+                            <h4>{{ k.speaker.name }}</h4>
+                            <h5>{{ k.qna_time }}</h5>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="sec-title">
+                <h2>실시간 방송 (후원사 광고) + a</h2>
+            </div>
+            <div class="row" id="video_area" name="video_area">
+
+            </div>
+        </div>
+    </section>
+    <section class="faq-section">
+        <div class="auto-container">
+            <!-- Sec Title -->
+            <div class="sec-title">
+                <span class="title">FAQ'S</span>
+                <h2>General Questions</h2>
+            </div>
+
+            <div class="row clearfix">
+                <!-- Content Column -->
+                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <!--Accordian Box-->
+                        <ul class="accordion-box">
+                            <!--Block-->
+                            <li class="accordion block wow fadeInUp">
+                                <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fa fa-angle-down"></span> </div>발표는 언제 볼 수 있나요?</div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">모든 세션은 배정된 날짜의 오전 10시부터 다음날 오전 9시까지 발표 소개 페이지에서 시청 가능합니다.<br> 예) 8일에 배정된 세션은 8일 오전 10시 ~ 9일 오전 9시까지 시청 가능</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion block wow fadeInUp">
+                                <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fa fa-angle-down"></span> </div>발표에 대한 질의응답은 어떻게 하나요?</div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">발표 당일 오후 8시부터 게더타운을 통해 발표자별로 질의 응답을 진행합니다.<br>발표자에 따라 질의응답을 진행하지 못하는 경우가 있으니, 발표 소개 페이지를 통해 질의응답 여부를 확인해주세요.</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <!--Accordian Box-->
+                        <ul class="accordion-box">
+                            <!--Block-->
+                            <li class="accordion block active-block wow fadeInUp">
+                                <div class="acc-btn active"><div class="icon-outer"><span class="icon icon-plus fa fa-angle-down"></span> </div>발표는 어떻게 보나요?</div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">발표가 공개되는 날, 로그인 후 발표 상세 페이지에서 발표를 볼 수 있습니다.</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion block active-block wow fadeInUp">
+                                <div class="acc-btn active"><div class="icon-outer"><span class="icon icon-plus fa fa-angle-down"></span> </div>발표 다시보기가 가능한가요?</div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">컨퍼런스가 끝난 다음날인 12월 10일부터 모든 발표의 다시보기가 홈페이지를 통해 제공됩니다.</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Speakers Section -->
+    <section class="speakers-section-two">
+        <div class="anim-icons">
+            <span class="icon icon-circle-4 wow zoomIn"></span>
+            <span class="icon icon-circle-3 wow zoomIn"></span>
+        </div>
+
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <span class="title">Special Speakers</span>
+                <h2>Keynote</h2>
+            </div>
+
+            <!-- Keynote Block -->
+            <div class="row">
+                {% for k in keynote %}
+                <div class="speaker-block-two col-lg-4 col-md-6 col-sm-6 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="info-box">
+                            <h4 class="name"><a href="/session/{{ k.id }}">{{ k.title }}</a></h4>
+                            <!--<span class="designation">Event Manager</span>-->
+                        </div>
+                        <div class="image-box">
+                            <figure class="image"><a href="/session/{{ k.id }}"><img src="{{ k.speaker.profile_img.url }}" alt=""></a></figure>
+                            <h4>{{ k.speaker.name }}</h4>
+                        </div>
+                        <div class="social-box">
+                            <ul class="social-links social-icon-colored">
+                                {% if k.speaker.facebook != '' %}
+                                <li><a href="{{ k.speaker.facebook }}"><i class="fa fa-facebook-f fa-2x"></i></a></li>
+                                {% endif %}
+                                {% if k.speaker.twitter != '' %}
+                                <li><a href="{{ k.speaker.twitter }}"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                {% endif %}
+                                {% if k.speaker.blog != '' %}
+                                <li><a href="{{ k.speaker.blog }}"><i class="fa fa-home fa-2x"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="sec-title text-center">
+                <span class="title">Special Speakers</span>
+                <h2>Sponsor Speaker</h2>
+            </div>
+            <div class="row">
+                {% for s in sponsor %}
+                <div class="speaker-block-two col-lg-4 col-md-6 col-sm-6 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="info-box">
+                            <h4 class="name"><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                            <!--<span class="designation">Event Manager</span>-->
+                        </div>
+                        <div class="image-box">
+                            {% if s.speaker.profile_img %}
+                                <figure class="image"><a href="/session/{{ s.id }}"><img src="{{ s.speaker.profile_img.url }}" alt=""></a></figure>
+                            {% else %}
+                                <figure class="image"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                            {% endif %}
+                            <h4>{{ s.speaker.name }}</h4>
+                        </div>
+                        <div class="social-box">
+                            <ul class="social-links social-icon-colored">
+                                {% if s.speaker.facebook != '' %}
+                                <li><a href="{{ s.speaker.facebook }}"><i class="fa fa-facebook-f fa-2x"></i></a></li>
+                                {% endif %}
+                                {% if s.speaker.twitter != '' %}
+                                <li><a href="{{ s.speaker.twitter }}"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                {% endif %}
+                                {% if s.speaker.blog != '' %}
+                                <li><a href="{{ s.speaker.blog }}"><i class="fa fa-home fa-2x"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+     <!--Sponsor Section-->
+    <section class="gallery-section">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <span class="title">Sponsors</span>
+                <h2>Diamond</h2>
+            </div>
+
+            <div class="row">
+                {% for d in diamond %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>Sapphire</h2>
+            </div>
+            <div class="row">
+                {% for d in sapphire %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+             <div class="sec-title text-center">
+                <h2>Gold</h2>
+            </div>
+            <div class="row">
+                {% for d in gold %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+             <div class="sec-title text-center">
+                <h2>Media</h2>
+            </div>
+            <div class="row">
+                {% for d in media %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+<script>
+new ncplayer('video_area', {
+              autostart: true,
+              playlist: [
+                  {file: "https://opfadbaoplgh9210838.gcdn.ntruss.com/live/video/ls-20211206012459-u7bH5/1080p-16-9/playlist.m3u8" }
+                  ],
+            });
+</script>
+{% endblock %}

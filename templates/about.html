@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="about-section">
+        <div class="anim-icons full-width">
+            <span class="icon icon-circle-blue wow fadeIn"></span>
+            <span class="icon icon-dots wow fadeInleft"></span>
+            <span class="icon icon-circle-1 wow zoomIn"></span>
+        </div>
+        <div class="auto-container">
+            <div class="row">
+                <!-- Content Column -->
+                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="sec-title">
+                            <span class="title">행사 소개</span>
+                            <h2>OpenInfra & Cloud Native Day Korea 2022</h2>
+                            <div class="text">
+                                <p>OpenInfra & Cloud Native Day Korea 2022은 OpenStack, Kubernetes, OCP, Ceph 커뮤니티가 합동으로 개최하는 국내 오픈소스 인프라스트럭처 커뮤니티 행사입니다.</p>
+                                <p>2014년 OpenStack 한국 커뮤니티에서 개최한 OpenStack Day Korea를 시작으로 2018년에는 폭넓은 기술 교류를 위해 OpenStack 뿐만 아니라 Ceph, Docker, Kubernetes 등 다양한 오픈 소스 SW 기술들과 함께 국내 AWS, Azure, Google Cloud 사용자 그룹 및 Ceph, Kubernetes 한국 커뮤니티들과 함께 OpenInfra Days Korea라는 명칭으로 행사를 개최하였습니다.
+                                2019년에는 Open Compute Project 한국 커뮤니티가 합류하여 Open Infrastructure & Cloud Native Days Korea 2019를 개최하였고, 많은 분들이 참가하여 성공적인 행사로 마무리할 수 있었습니다.</p>
+                                <p>2022년 행사는 기나긴 온라인 행사를 벗어나, 드디어 대면으로 커뮤니티 구성원과 만납니다. 3년만의 대면 행사를 통해서 Open Infrastructure와 연관된 여러 분야의 기술들을 한 자리에서 접하고, 서로 논의하며 공유할 수 있는 기회가 되시기를 바랍니다.</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Column -->
+                <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="image-box">
+                        <figure class="image wow fadeIn"><img src="{% static 'images/openinfra_stage_main.jpeg' %}" alt=""></figure>
+                    </div>
+                </div>
+                <!-- Content Column OpenStack -->
+              <div class="content-column col-lg-12 col-md-12 col-sm-12">
+                  <div class="inner-column">
+                      <div class="sec-title">
+                          <span class="title">ABOUT COMMUNITY</span>
+                          <h2>OpenStack 한국 커뮤니티</h2>
+                      </div>
+                      <ul class="list-style-one">
+                          <li>매월 기술세미나 개최 및 오픈스택 & 인프라 관련 스터디 프로그램 진행</li>
+                          <li>오픈소스 관련 컨퍼런스 발표 및 연 1회 OpenStack Day(s) 개최</li>
+                          <li>Open Learning Center와 교육프로그램 개설</li>
+                          <li>공식 한국어 번역팀 운영, 스터디 등 다양한 온/오프라인 커뮤니티 활동</li>
+                      </ul>
+                      <div class="btn-box"><a href="https://www.facebook.com/groups/openstack.kr" target="_blank" class="theme-btn btn-style-three"><span class="btn-title">VISIT COMMUNITY</span></a></div>
+                  </div>
+              </div>
+
+                <div class="content-column col-lg-12 col-md-12 col-sm-12">
+                  <div class="inner-column">
+                      <div class="sec-title">
+                          <span class="title">ABOUT COMMUNITY</span>
+                          <h2>Kubernetes 코리아 그룹</h2>
+                          <div class="text">
+                            <p>쿠버네티스 코리아 그룹은 2016년 1월 9일에 만들어졌으며 2022년 현재 9천여명의 회원을 보유하고 있는 국내 최대 쿠버네티스 그룹입니다.</p>
+                        </div>
+                      </div>
+                      <ul class="list-style-one">
+                          <li>정기 meetup (기술 세미나) 진행</li>
+                          <li>Cloud Native 관련 기술 스터디 프로그램 진행</li>
+                          <li>CNCF가 후원 하는 컨퍼런스 KCD Korea(Kubernetes Community Day in Korea) 개최</li>
+                          <li>공식 한국어 번역팀 운영, 스터디 등 다양한 온/오프라인 커뮤니티 활동</li>
+                    </ul>
+                    <div class="btn-box"><a href="https://www.facebook.com/groups/k8skr" target="_blank" class="theme-btn btn-style-three"><span class="btn-title">VISIT COMMUNITY</span></a></div>
+                  </div>
+              </div>
+
+              <!-- Content Column -->
+              <div class="content-column col-lg-12 col-md-12 col-sm-12">
+                  <div class="inner-column">
+                      <div class="sec-title">
+                          <span class="title">ABOUT COMMUNITY</span>
+                          <h2>Ceph 한국 커뮤니티</h2>
+                      </div>
+                      <ul class="list-style-one">
+                          <li>정기 meetup (기술 세미나) 진행 Ceph 관련 기술 스터디 프로그램 진행</li>
+                          <li>컨퍼런스 발표</li>
+                          <li>공식문서 번역 작업 진행</li>
+                      </ul>
+                      <div class="btn-box"><a href="https://www.facebook.com/groups/620899444961207" target="_blank" class="theme-btn btn-style-three"><span class="btn-title">VISIT COMMUNITY​</span></a></div>
+                  </div>
+              </div>
+
+              <!-- Content Column -->
+              <div class="content-column col-lg-12 col-md-12 col-sm-12">
+                  <div class="inner-column">
+                      <div class="sec-title">
+                          <span class="title">ABOUT COMMUNITY</span>
+                          <h2>Open Compute Project 한국 커뮤니티</h2>
+                      </div>
+                      <ul class="list-style-one">
+                          <li>정기 meetup (기술 세미나) 진행</li>
+                          <li>컨퍼런스 발표 및 전시 진행</li>
+                          <li>온라인 커뮤니티 운영</li>
+                      </ul>
+                      <div class="btn-box"><a href="https://web.facebook.com/groups/ocpkorea/" target="_blank" class="theme-btn btn-style-three"><span class="btn-title">VISIT COMMUNITY​</span></a></div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
