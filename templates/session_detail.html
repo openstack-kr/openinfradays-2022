@@ -46,29 +46,6 @@
                         <h3>{{ session.speaker.name }}</h3>
                         <h4>Speaker's bio</h4>
                         <p>{{  session.speaker.bio|linebreaks }}</p>
-                        <h4>Info</h4>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="speaker-session-info">
-                                    <h5>Schedule</h5>
-                                    {% if session.session_type == 'Keynote' or session.session_type == 'Community' %}
-                                        <h6>All Day</h6>
-                                    {% else %}
-                                        <h6>{{ session.open_date }}</h6>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% if session.qna_enable %}
-                            <div class="col-lg-4">
-                                <div class="speaker-session-info">
-                                    <h5>Q&A with speaker</h5>
-                                    <h6>{{ session.qna_date }}</h6>
-                                    <span> {{ session.qna_time}}</span>
-				    <p> {{ session.qna_location }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
                         <h4>Session detail</h4>
                         <p>{{ session.details| safe }}</p>
                     </div>

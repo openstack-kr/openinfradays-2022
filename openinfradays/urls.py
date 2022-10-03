@@ -23,6 +23,8 @@ from . import views, sns_login
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('session/<int:session_id>', views.session_detail),
+    path('program/sessions', views.session_list),
     path('about', views.about),
 ]
 
