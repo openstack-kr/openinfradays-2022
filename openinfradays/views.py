@@ -56,7 +56,6 @@ def lobby(request):
     return render(request, 'lobby.html', {**menu, **context})
 
 
-@agreement_required
 def index(request):
     diamond = Sponsor.objects.filter(level='Diamond')
     sapphire = Sponsor.objects.filter(level='Sapphire')
