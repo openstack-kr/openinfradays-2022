@@ -37,7 +37,7 @@ class Speaker(models.Model):
 
 class TechSession(models.Model):
     title = models.CharField(max_length=100)
-    details = models.TextField(max_length=1000)
+    details = models.TextField(max_length=2000)
     speaker = models.OneToOneField(Speaker, on_delete=models.SET_NULL, null=True)
     slide = models.FileField(upload_to='slides/', default='', blank=True)
     video_url = models.CharField(max_length=1000, default='', blank=True)

@@ -26,6 +26,7 @@ urlpatterns = [
     path('session/<int:session_id>', views.session_detail),
     path('program/sessions', views.session_list),
     path('about', views.about),
+    path('sponsors', views.sponsors),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

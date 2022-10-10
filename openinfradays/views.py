@@ -77,7 +77,6 @@ def about(request):
     return render(request, 'about.html', context)
 
 
-@agreement_required
 def sponsors(request):
     diamond = Sponsor.objects.filter(level='Diamond')
     sapphire = Sponsor.objects.filter(level='Sapphire')
@@ -147,7 +146,7 @@ def virtualbooth_detail(request, virtualbooth_id):
 def session_detail(request, session_id):
     session = TechSession.objects.get(id=session_id)
     ads = AdVideo.objects.all()
-    menu = make_menu_context('schedule')
+    menu = make_menu_context('program')
     ads_link = []
     ad1_url = ''
     ad2_url = ''
@@ -182,7 +181,7 @@ def session_detail(request, session_id):
 def session_list(request):
     sessions = TechSession.objects.all()
     context = {'sessions': sessions}
-    menu = make_menu_context('schedule')
+    menu = make_menu_context('program')
     return render(request, 'sessions.html', {**menu, **context})
 
 

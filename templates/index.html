@@ -202,4 +202,67 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4445.040901712181!2d127.05497241494857!3d37.513394566314396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca46af653508b%3A0x77dcffee7049376b!2z7L2U7JeR7IqkIOq3uOuenOuTnOuzvOujuA!5e0!3m2!1sen!2skr!4v1662886185173!5m2!1sen!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
+
+    <section class="gallery-section">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <span class="title">Sponsors</span>
+                <h2>Diamond</h2>
+            </div>
+
+            <div class="row">
+                {% for d in diamond %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>Sapphire</h2>
+            </div>
+            <div class="row">
+                {% for d in sapphire %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+             <div class="sec-title text-center">
+                <h2>Gold</h2>
+            </div>
+            <div class="row">
+                {% for d in gold %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="auto-container">
+             <div class="sec-title text-center">
+                <h2>Media</h2>
+            </div>
+            <div class="row">
+                {% for d in media %}
+                    <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                        <div class="image-box text-center">
+                            <figure class="image-box"><a href="{{  d.homepage_url }}" target="_blank"><img src="{{ d.logo.url }}" alt="{{  d.name_ko }}"></a></figure>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+
 {% endblock %}

@@ -28,7 +28,7 @@
                             <h5 class="name">{{ s.speaker.name }}</h5>
                             <span class="designation">{{ s.speaker.company }}</span>
                         </div>
-                        <h4><a href="/session/{{ s.id }}">{{ s.title }}</a></h4>
+                        <h4><a href="/session/{{ s.id }}" style="word-break: keep-all;">{{ s.title }}</a></h4>
                         <div class="text">{{ s.details | truncatechars:60 }}</div>
                         <div class="btn-box">
                             <a href="/session/{{ s.id }}" class="theme-btn">Detail</a>
