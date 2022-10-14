@@ -77,7 +77,6 @@ def virtualbooth(request):
     return render(request, 'virtualbooth.html', {**menu, **context})
 
 
-@agreement_required
 def virtualbooth_detail(request, virtualbooth_id):
     virtualbooth = VirtualBooth.objects.get(id=virtualbooth_id)
     menu = make_menu_context('virtualbooth')
