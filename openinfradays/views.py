@@ -39,23 +39,6 @@ def make_menu_context(current=None):
     return context
 
 
-def lobby(request):
-    menu = make_menu_context('index')
-    bofs = Bof.objects.filter(bof_date=date.today())
-    sn = SponsorNight.objects.filter(event_date=date.today()).first()
-    qna = TechSession.objects.filter(qna_date=date.today(), qna_enable=True)
-    diamond = Sponsor.objects.filter(level='Diamond')
-    sapphire = Sponsor.objects.filter(level='Sapphire')
-    gold = Sponsor.objects.filter(level='Gold')
-    media = Sponsor.objects.filter(level='Media')
-    keynote_session = TechSession.objects.filter(session_type='Keynote')
-    sponsor_session = TechSession.objects.filter(session_type='Sponsor')
-    context = {'bofs': bofs, 'sn': sn, 'diamond': diamond, 'sapphire': sapphire,
-               'gold': gold, 'media': media, 'qna': qna,
-               'keynote': keynote_session, 'sponsor': sponsor_session,}
-    return render(request, 'lobby.html', {**menu, **context})
-
-
 def index(request):
     diamond = Sponsor.objects.filter(level='Diamond')
     sapphire = Sponsor.objects.filter(level='Sapphire')
@@ -85,46 +68,6 @@ def sponsors(request):
     menu = make_menu_context('sponsor')
     context = {'diamond': diamond, 'sapphire': sapphire, 'gold': gold, 'media': media}
     return render(request, 'sponsors.html', {**menu, **context})
-
-
-@csrf_exempt
-def join(request):
-    if request.method == "GET":
-        if not request.user.is_authenticated:
-            return redirect('/')
-
-        if request.user.profile.agree_with_private:
-            return redirect('/')
-        return render(request, 'join.html', {'user': request.user})
-    elif request.method == "POST":
-        body = json.loads(request.body)
-        user = request.user
-        user.profile.agree_with_private = True
-        user.profile.agree_with_sponsor = True
-        user.first_name = body['user_name']
-        user.profile.company = body['user_org']
-        user.profile.job = body.get('user_job', '')
-        user.profile.naver_cloud_form = body.get('naver_cloud_form', '')
-        if body.get('naver_cloud_agree') == 'Y':
-            user.profile.is_check_navercloud = True
-        user.save()
-        return JsonResponse({'result': True})
-
-
-@csrf_exempt
-def update_profile(request):
-    if request.method != "PUT" or not request.user.is_authenticated:
-        return redirect('/')
-    user = request.user
-    body = json.loads(request.body)
-    user.first_name = body['user_name']
-    user.profile.company = body['user_org']
-    user.profile.job = body.get('user_job', '')
-    user.profile.naver_cloud_form = body.get('naver_cloud_form', '')
-    if body.get('naver_cloud_agree') == 'Y':
-        user.profile.is_check_navercloud = True
-    user.save()
-    return JsonResponse({'result': True})
 
 
 @agreement_required
@@ -179,9 +122,11 @@ def session_detail(request, session_id):
 
 
 def session_list(request):
-    sessions = TechSession.objects.all()
-    context = {'sessions': sessions}
     menu = make_menu_context('program')
+    keynote = TechSession.objects.filter(session_type='Keynote')
+    tech = TechSession.objects.filter(session_type='Tech')
+    sponsor = TechSession.objects.filter(session_type='Sponsor')
+    context = {'keynote': keynote, 'sponsor': sponsor, 'tech': tech}
     return render(request, 'sessions.html', {**menu, **context})
 
 
