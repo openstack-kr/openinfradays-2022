@@ -70,7 +70,6 @@ def sponsors(request):
     return render(request, 'sponsors.html', {**menu, **context})
 
 
-@agreement_required
 def virtualbooth(request):
     vb = VirtualBooth.objects.all()
     menu = make_menu_context('virtualbooth')
