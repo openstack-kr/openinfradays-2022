@@ -149,7 +149,8 @@ def session_list(request):
     keynote = TechSession.objects.filter(session_type='Keynote')
     tech = TechSession.objects.filter(session_type='Tech')
     sponsor = TechSession.objects.filter(session_type='Sponsor')
-    context = {'keynote': keynote, 'sponsor': sponsor, 'tech': tech}
+    online = TechSession.objects.filter(session_type='Online')
+    context = {'keynote': keynote, 'sponsor': sponsor, 'tech': tech, 'online': online}
     return render(request, 'sessions.html', {**menu, **context})
 
 
