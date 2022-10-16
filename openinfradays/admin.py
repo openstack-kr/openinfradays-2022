@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 from .models import Sponsor, TechSession, Speaker, VirtualBooth,\
-    Profile, SponsorNight, Bof, OnetimeToken, AdVideo
+    Profile, SponsorNight, Bof, OnetimeToken, AdVideo, Room, TimeSlot
 
 
 class AccessLogAdmin(admin.ModelAdmin):
@@ -21,11 +21,23 @@ class SponsorAdmin(admin.ModelAdmin):
 
 
 class TechSessionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_speaker', 'session_type', 'open_date', 'video_url')
+    list_display = ('title', 'get_speaker', 'session_type', 'get_room', 'get_time', 'video_url')
 
     @admin.display(ordering='speaker__name', description='Speaker')
     def get_speaker(self, obj):
         return obj.speaker.name
+
+    @admin.display(ordering='room__room_name', description='Room')
+    def get_room(self, obj):
+        if obj.room is None:
+            return obj.session_type
+        return obj.room.room_name
+
+    @admin.display(ordering='timeslot__start_time', description='Time')
+    def get_time(self, obj):
+        if obj.time_slot is None:
+            return "--"
+        return obj.time_slot.start_time
 
 
 class SpeakerAdmin(admin.ModelAdmin):
@@ -63,6 +75,14 @@ class OneTimeTokenAdmin(admin.ModelAdmin):
 
 class AdVideoAdmin(admin.ModelAdmin):
     list_display = ('url',)
+
+
+class TimeSlotAdmin(admin.ModelAdmin):
+    list_display = ('start_time', 'end_time')
+
+
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ('room_name',)
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -125,3 +145,5 @@ admin.site.register(OnetimeToken, OneTimeTokenAdmin)
 admin.site.register(AdVideo, AdVideoAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(Room, RoomAdmin)
+admin.site.register(TimeSlot, TimeSlotAdmin)

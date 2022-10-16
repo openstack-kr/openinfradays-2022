@@ -35,10 +35,25 @@ class Speaker(models.Model):
         return self.name
 
 
+class TimeSlot(models.Model):
+    start_time = models.CharField(max_length=10)
+    end_time = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.start_time
+
+
+class Room(models.Model):
+    room_name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.room_name
+
+
 class TechSession(models.Model):
     title = models.CharField(max_length=100)
     details = models.TextField(max_length=2000)
-    speaker = models.OneToOneField(Speaker, on_delete=models.SET_NULL, null=True)
+    speaker = models.ForeignKey(Speaker, on_delete=models.SET_NULL, null=True)
     slide = models.FileField(upload_to='slides/', default='', blank=True)
     video_url = models.CharField(max_length=1000, default='', blank=True)
     ad1_url = models.CharField(max_length=1000, default='', blank=True)
@@ -47,12 +62,15 @@ class TechSession(models.Model):
 
     session_type = models.CharField(max_length=20,
                                     choices=[('Keynote', 'Keynote'), ('Sponsor', 'Sponsor'), ('Tech', "Tech"),
-                                             ('Community', "Community")],
+                                             ('Community', "Community"), ('Online', 'Online'),
+                                             ('TimeTable', 'TimeTable')],
                                     default='Tech')
     qna_enable = models.BooleanField(default=False, blank=True)
     qna_date = models.DateField(blank=True, default='2021-12-07')
     qna_time = models.TimeField(blank=True, default='00:00:00')
     qna_location = models.CharField(max_length=100, default='Gather Town')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, default=None, null=True, blank=True)
 
 
 class VirtualBooth(models.Model):

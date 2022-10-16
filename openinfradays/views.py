@@ -13,9 +13,15 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.template.defaulttags import register
 
 from .models import Sponsor, TechSession, VirtualBooth, \
-    SponsorNight, Bof, AdVideo
+    SponsorNight, Bof, AdVideo, Room, TimeSlot
+
+
+@register.filter
+def get_session_by_room_id(sessions, room_id):
+    return sessions.get(room_id)
 
 
 def agreement_required(function):
@@ -75,6 +81,25 @@ def virtualbooth(request):
     menu = make_menu_context('virtualbooth')
     context = {'virtualbooth': vb}
     return render(request, 'virtualbooth.html', {**menu, **context})
+
+
+def schedules(request):
+    rooms = Room.objects.all()
+    slots = TimeSlot.objects.all()
+    tech_session = TechSession.objects.filter(Q(session_type='Tech') | Q(session_type='Sponsor')
+                                              | Q(session_type='Keynote') | Q(session_type='TimeTable'))
+    session_per_time = {}
+    for s in slots:
+        session_per_time[s.start_time] = {}
+    for t in tech_session:
+        if t.room is None:
+            session_per_time[t.time_slot.start_time]['all'] = t
+        else:
+            session_per_time[t.time_slot.start_time][t.room.room_name] = t
+
+    menu = make_menu_context('schedule')
+    context = {'rooms': rooms, 'sessions': session_per_time}
+    return render(request, 'schedules.html', {**menu, **context})
 
 
 def virtualbooth_detail(request, virtualbooth_id):

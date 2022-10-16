@@ -29,6 +29,7 @@ urlpatterns = [
     path('sponsors', views.sponsors),
     path('virtualbooth', views.virtualbooth),
     path('virtualbooth/<int:virtualbooth_id>', views.virtualbooth_detail),
+    path('schedule', views.schedules),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

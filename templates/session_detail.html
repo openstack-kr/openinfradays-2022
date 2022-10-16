@@ -45,9 +45,27 @@
                     <div class="text-box">
                         <h3>{{ session.speaker.name }}</h3>
                         <h4>Speaker's bio</h4>
-                        <p>{{  session.speaker.bio|linebreaks }}</p>
+                        <p style="word-break: keep-all;">{{  session.speaker.bio|linebreaks }}</p>
+                        <h4>Schedule</h4>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="speaker-session-info">
+                                    {% if session.session_type == 'Online'%}
+                                        <h5>온라인 공개</h5>
+                                    {% else %}
+                                        {% if session.room is None %}
+                                            <h5>Track : All Rooms</h5>
+                                        {% else %}
+                                            <h5>Track : {{ session.room.room_name }}</h5>
+                                        {% endif %}
+
+                                        <h5>Time: {{ session.time_slot.start_time }} ~ {{ session.time_slot.end_time }}</h5>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                         <h4>Session detail</h4>
-                        <p>{{ session.details| safe }}</p>
+                        <p style="word-break: keep-all;">{{ session.details| safe }}</p>
                     </div>
                 </div>
             </div>
