@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 from .models import Sponsor, TechSession, Speaker, VirtualBooth,\
-    Profile, SponsorNight, Bof, OnetimeToken, AdVideo, Room, TimeSlot
+    Profile, SponsorNight, Bof, OnetimeToken, AdVideo, Room, TimeSlot, RegistrationCount
 
 
 class AccessLogAdmin(admin.ModelAdmin):
@@ -62,6 +62,10 @@ class SponsorNightAdmin(admin.ModelAdmin):
 
 class BofAdmin(admin.ModelAdmin):
     list_display = ('title', 'moderator', 'bof_date', 'bof_time')
+
+
+class RegistrationCountAdmin(admin.ModelAdmin):
+    list_display = ('reg_type', 'count')
 
 
 class ProfileInline(admin.StackedInline):
@@ -147,3 +151,4 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Room, RoomAdmin)
 admin.site.register(TimeSlot, TimeSlotAdmin)
+admin.site.register(RegistrationCount, RegistrationCountAdmin)

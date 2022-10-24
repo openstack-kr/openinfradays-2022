@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template.defaulttags import register
 
 from .models import Sponsor, TechSession, VirtualBooth, \
-    SponsorNight, Bof, AdVideo, Room, TimeSlot
+    SponsorNight, Bof, AdVideo, Room, TimeSlot, RegistrationCount
 
 
 @register.filter
@@ -52,11 +52,16 @@ def index(request):
     media = Sponsor.objects.filter(level='Media')
     keynote_session = TechSession.objects.filter(session_type='Keynote')
     sponsor_session = TechSession.objects.filter(session_type='Sponsor')
+    regcount = RegistrationCount.objects.all()
+    cnt = 0
+    for r in regcount:
+        cnt += r.count
     menu = make_menu_context('index')
+    today = datetime.today().strftime('%m월  %d일')
     context = {'diamond': diamond, 'sapphire': sapphire,
                'gold': gold, 'media': media,
                'keynote': keynote_session, 'sponsor': sponsor_session,
-               'login': login}
+               'reg_count': cnt, 'today': today}
     return render(request, 'index.html', {**menu, **context})
 
 

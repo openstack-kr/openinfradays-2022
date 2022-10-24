@@ -159,3 +159,8 @@ class Bof(models.Model):
 
 class AdVideo(models.Model):
     url = models.CharField(max_length=100, default='')
+
+
+class RegistrationCount(models.Model):
+    reg_type = models.CharField(max_length=20)
+    count = models.IntegerField()
