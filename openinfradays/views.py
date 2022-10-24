@@ -65,7 +65,6 @@ def index(request):
     return render(request, 'index.html', {**menu, **context})
 
 
-@agreement_required
 def about(request):
     context = make_menu_context('about')
     return render(request, 'about.html', context)
