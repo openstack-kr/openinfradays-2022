@@ -70,6 +70,10 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def bulk(request):
+    return render(request, 'bulk.html')
+
+
 def sponsors(request):
     diamond = Sponsor.objects.filter(level='Diamond')
     sapphire = Sponsor.objects.filter(level='Sapphire')

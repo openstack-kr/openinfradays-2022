@@ -26,6 +26,7 @@ urlpatterns = [
     path('session/<int:session_id>', views.session_detail),
     path('program/sessions', views.session_list),
     path('about', views.about),
+    path('bulk', views.bulk),
     path('sponsors', views.sponsors),
     path('virtualbooth', views.virtualbooth),
     path('virtualbooth/<int:virtualbooth_id>', views.virtualbooth_detail),
