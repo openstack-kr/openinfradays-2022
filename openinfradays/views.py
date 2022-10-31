@@ -162,127 +162,18 @@ def session_list(request):
     return render(request, 'sessions.html', {**menu, **context})
 
 
-@agreement_required
-def bof_schedule(request):
-    menu = make_menu_context('schedule')
-    bof = Bof.objects.all()
-    return render(request, 'bof_schedule.html', {**menu, "bof": bof})
-
-
-@agreement_required
-def sponsornight_schedule(request):
-    menu = make_menu_context('schedule')
-    sponsor_night = SponsorNight.objects.all()
-    now = datetime.now()
-    return render(request, 'sponsornight_schedule.html', {**menu, 'sponsor_night': sponsor_night, 'now': now})
-
-
-@agreement_required
-def sponsor_night_introduce(request):
-    menu = make_menu_context('program')
-    sponsor_night = SponsorNight.objects.all()
-    now = datetime.now()
-    context = {'sponsor_night': sponsor_night, 'now': now}
-    return render(request, 'sponsor_night_introduce.html', {**menu, **context})
-
-
-@agreement_required
-def bof_introduce(request):
-    diamond = Sponsor.objects.filter(level='Diamond')
-    context = {'diamond': diamond}
-    menu = make_menu_context('program')
-    return render(request, 'bof_introduce.html', {**menu, **context})
-
-
-@agreement_required
 def event(request):
     return render(request, 'event.html')
 
 
-@agreement_required
-@csrf_exempt
-def profile(request):
-    if not request.user.is_authenticated:
-        return redirect('/login')
-    user = request.user
-    context = {'user': user}
-    menu = make_menu_context()
-    return render(request, 'profile.html', {**menu, **context})
-
-
-def login(request):
-    menu = make_menu_context()
-    menu['intro'] = True
-    return render(request, 'login.html', menu)
-
-
-@csrf_exempt
-def signup(request):
-    if request.user.is_authenticated:
-        return redirect('/')
-
-    if request.method == "GET":
-        if not request.user.is_authenticated:
-            return render(request, 'signup.html', make_menu_context())
-        return redirect('/')
-
-    elif request.method == "POST":
-        body = json.loads(request.body)
-        UserModel = get_user_model()
-        try:
-            u = UserModel.objects.get(email=body['user_email'])
-            return JsonResponse({'result': False})
-        except UserModel.DoesNotExist:
-            pass
-
-        user = UserModel(email=body['user_email'])
-        user.username = "oidk_%s_" % uuid.uuid4().hex
-        user.first_name = body['user_name']
-        user.save()
-        user.profile.agree_with_private = True
-        user.profile.agree_with_sponsor = True
-        user.email = body['user_email']
-        user.profile.company = body['user_org']
-        user.profile.job = body.get('user_job', '')
-        user.profile.naver_cloud_form = body.get('naver_cloud_form', '')
-        if body.get('naver_cloud_agree') == 'Y':
-            user.profile.is_check_navercloud = True
-        user.save()
-
-        email_appkey = settings.NHNCLOUD_EMAIL_APPKEY
-        email_secret = settings.NHNCLOUD_EMAIL_SECRET
-        base_domain = settings.BASE_DOMAIN
-        requests.post(
-            url="https://api-mail.cloud.toast.com/email/v2.0/appKeys/%s/sender/mail" % email_appkey,
-            headers={
-                "X-Secret-Key": email_secret,
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            data=json.dumps({
-                "senderName": "OpenInfra Days Korea",
-                "templateId": "signup_success",
-                "receiverList": [
-                    {
-                        "receiveMailAddr": body.get('user_email'),
-                        "receiveType": "MRT0"
-                    }
-                ],
-                "templateParameter": {
-                    "name": user.first_name
-                }
-            })
-        )
-        return JsonResponse({'result': True})
-    return render(request, 'signup.html', make_menu_context())
-
-
-@agreement_required
-def logout(request):
-    auth.logout(request)
-    return redirect('/')
-
-
-@agreement_required
-def bof_detail(request, bof_id):
-    bof = Bof.objects.get(id=bof_id)
-    return render(request, 'bof_detail.html', {'b': bof})
+def lobby(request):
+    menu = make_menu_context('index')
+    diamond = Sponsor.objects.filter(level='Diamond')
+    sapphire = Sponsor.objects.filter(level='Sapphire')
+    gold = Sponsor.objects.filter(level='Gold')
+    media = Sponsor.objects.filter(level='Media')
+    online_session = TechSession.objects.filter(session_type='Online')
+    context = {'diamond': diamond, 'sapphire': sapphire,
+               'gold': gold, 'media': media,
+               'online': online_session}
+    return render(request, 'lobby.html', {**menu, **context})

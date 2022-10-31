@@ -22,7 +22,7 @@ from . import views, sns_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('', views.lobby),
     path('session/<int:session_id>', views.session_detail),
     path('program/sessions', views.session_list),
     path('about', views.about),
@@ -31,6 +31,9 @@ urlpatterns = [
     path('virtualbooth', views.virtualbooth),
     path('virtualbooth/<int:virtualbooth_id>', views.virtualbooth_detail),
     path('schedule', views.schedules),
+    path('lobby', views.lobby),
+    path('event', views.event),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
