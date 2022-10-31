@@ -73,20 +73,12 @@
                             <!--<span class="designation">Event Manager</span>-->
                         </div>
                         <div class="image-box">
+                            {% if k.speaker.profile_img %}
+                            <figure class="image"><img src="{{ k.speaker.profile_img.url }}" alt=""></figure>
+                            {% else %}
+                            <figure class="image"><img src="{% static 'images/empty_profile.png' %}" alt=""></figure>
+                            {% endif %}
                             <h4>{{ k.speaker.name }}</h4>
-                        </div>
-                        <div class="social-box">
-                            <ul class="social-links social-icon-colored">
-                                {% if k.speaker.facebook != '' %}
-                                <li><a href="{{ k.speaker.facebook }}"><i class="fa fa-facebook-f fa-2x"></i></a></li>
-                                {% endif %}
-                                {% if k.speaker.twitter != '' %}
-                                <li><a href="{{ k.speaker.twitter }}"><i class="fa fa-twitter fa-2x"></i></a></li>
-                                {% endif %}
-                                {% if k.speaker.blog != '' %}
-                                <li><a href="{{ k.speaker.blog }}"><i class="fa fa-home fa-2x"></i></a></li>
-                                {% endif %}
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -97,10 +89,6 @@
 
 
     <section class="speakers-section-two">
-        <div class="anim-icons">
-            <span class="icon icon-circle-4 wow zoomIn"></span>
-            <span class="icon icon-circle-3 wow zoomIn"></span>
-        </div>
 
         <div class="auto-container">
             <div class="sec-title text-center">
@@ -112,7 +100,7 @@
             <div class="row">
                 <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
                     <div class="image-box text-center">
-                        <figure class="image-box"><a href="/virtualbooth/2" target="_blank"><img src="/media/images/sponsor/sponsors-d04.png"}"></a></figure>
+                        <figure class="image-box"><a href="/virtualbooth/2" target="_blank"><img src="/media/images/sponsor/sponsors-d04.png"></a></figure>
                     </div>
                 </div>
             </div>
